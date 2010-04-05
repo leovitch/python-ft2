@@ -20,7 +20,7 @@ import ctypes
 
 from ft2 import image, types
 
-__all__ = ['BitmapSize', 'Driver', 'GlyphMetrics', 'Library']
+__all__ = ['BitmapSize', 'Driver', 'GlyphMetrics', 'Library', 'Module']
 
 
 class BitmapSize(ctypes.Structure):
@@ -55,4 +55,9 @@ class GlyphMetrics(ctypes.Structure):
 
 class Library(ctypes.Structure):
     """Handles a FreeType library instance."""
+    pass
+
+
+class Module(ctypes.Structure):
+    """Handle to a given FreeType module object."""
     pass
