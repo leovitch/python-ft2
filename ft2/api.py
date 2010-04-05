@@ -20,7 +20,7 @@ import ctypes
 
 from ft2 import image, types
 
-__all__ = ['BitmapSize', 'Driver', 'GlyphMetrics', 'Library', 'Module']
+__all__ = ['BitmapSize', 'Driver', 'Face', 'GlyphMetrics', 'Library', 'Module']
 
 
 class BitmapSize(ctypes.Structure):
@@ -35,7 +35,12 @@ class BitmapSize(ctypes.Structure):
 
 
 class Driver(ctypes.Structure):
-    """Handle to a given FreeType font driver object."""
+    """A special module capable of creating faces from font files."""
+    pass
+
+
+class Face(ctypes.Structure):
+    """Models a given typeface in a given style."""
     pass
 
 
@@ -54,10 +59,10 @@ class GlyphMetrics(ctypes.Structure):
 
 
 class Library(ctypes.Structure):
-    """Handles a FreeType library instance."""
+    """Parent of all other objects in FreeType."""
     pass
 
 
 class Module(ctypes.Structure):
-    """Handle to a given FreeType module object."""
+    """Provides services in FreeType."""
     pass
