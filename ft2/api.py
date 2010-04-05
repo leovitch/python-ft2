@@ -20,10 +20,11 @@ import ctypes
 
 from ft2 import image, types
 
-__all__ = ['BitmapSize', 'GlyphMetrics']
+__all__ = ['BitmapSize', 'GlyphMetrics', 'Library']
 
 
 class BitmapSize(ctypes.Structure):
+    """Models the metrics of a bitmap strike in a bitmap font."""
     _fields_ = [
         ('height', types.Short),
         ('width', types.Short),
@@ -34,6 +35,7 @@ class BitmapSize(ctypes.Structure):
 
 
 class GlyphMetrics(ctypes.Structure):
+    """Models the metrics of a single glyph."""
     _fields_ = [
         ('width', image.Pos),
         ('height', image.Pos),
@@ -44,3 +46,8 @@ class GlyphMetrics(ctypes.Structure):
         ('vertBearingY', image.Pos),
         ('vertAdvance', image.Pos)
     ]
+
+
+class Library(ctypes.Structure):
+    """Handles a FreeType library instance."""
+    pass
