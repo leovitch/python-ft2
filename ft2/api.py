@@ -20,8 +20,8 @@ import ctypes
 
 from ft2 import image, types
 
-__all__ = ['BitmapSize', 'Driver', 'Face', 'GlyphMetrics', 'GlyphSlot',
-           'Library', 'Module', 'Size']
+__all__ = ['BitmapSize', 'CharMap', 'Driver', 'Face', 'GlyphMetrics',
+           'GlyphSlot', 'Library', 'Module', 'Size']
 
 
 class BitmapSize(ctypes.Structure):
@@ -33,6 +33,15 @@ class BitmapSize(ctypes.Structure):
         ('x_ppem', image.Pos),
         ('y_ppem', image.Pos)
     ]
+
+
+class CharMap(ctypes.Structure):
+    """
+    Translates character codes in a given encoding into glyph indices for its
+    parent's face.
+
+    """
+    pass
 
 
 class Driver(ctypes.Structure):
@@ -66,6 +75,7 @@ class GlyphSlot(ctypes.Structure):
 
     """
     pass
+
 
 class Library(ctypes.Structure):
     """Parent of all other objects in FreeType."""
