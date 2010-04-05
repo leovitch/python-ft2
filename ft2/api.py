@@ -20,7 +20,7 @@ import ctypes
 
 from ft2 import image, types
 
-__all__ = ['BitmapSize', 'GlyphMetrics', 'Library']
+__all__ = ['BitmapSize', 'Driver', 'GlyphMetrics', 'Library']
 
 
 class BitmapSize(ctypes.Structure):
@@ -32,6 +32,11 @@ class BitmapSize(ctypes.Structure):
         ('x_ppem', image.Pos),
         ('y_ppem', image.Pos)
     ]
+
+
+class Driver(ctypes.Structure):
+    """Handle to a given FreeType font driver object."""
+    pass
 
 
 class GlyphMetrics(ctypes.Structure):
