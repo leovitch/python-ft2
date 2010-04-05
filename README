@@ -1,0 +1,24 @@
+Python-FT2
+==========
+
+Python-FT2 is a ctypes binding for the FreeType2 project.
+
+
+Dependencies
+------------
+
+Python 3.0+ - http://www.python.org/
+
+
+Documentation
+-------------
+
+Extensive documentation and installation instructions can be found in the
+``docs`` directory of this source distribution.
+
+
+Support
+-------
+
+For any feature requests or issues regarding this project, please e-mail
+rcoyner@gmail.com.
