@@ -20,8 +20,8 @@ import ctypes
 
 from ft2 import image, types
 
-__all__ = ['BitmapSize', 'Driver', 'Face', 'GlyphMetrics', 'Library', 'Module',
-           'Size']
+__all__ = ['BitmapSize', 'Driver', 'Face', 'GlyphMetrics', 'GlyphSlot',
+           'Library', 'Module', 'Size']
 
 
 class BitmapSize(ctypes.Structure):
@@ -58,6 +58,14 @@ class GlyphMetrics(ctypes.Structure):
         ('vertAdvance', image.Pos)
     ]
 
+
+class GlyphSlot(ctypes.Structure):
+    """
+    A container where glyph images are loaded independently of the glyph image
+    format.
+
+    """
+    pass
 
 class Library(ctypes.Structure):
     """Parent of all other objects in FreeType."""
