@@ -14,24 +14,11 @@
 # You should have received a copy of the GNU General Public License along with
 # this program. If not, see <http://www.gnu.org/licenses/>.
 
+"""FreeType simple types definitions."""
+
 import ctypes
-import logging
+
+__all__ = ['Short']
 
 
-logger = logging.getLogger('ft2')
-logger.setLevel(logging.INFO)
-logger.propagate = False
-
-if len(logger.handlers) == 0:
-    logger.addHandler(logging.NullHandler())
-
-try:
-    logger.info('Loading libfreetype...')
-    libGL = ctypes.cdll.LoadLibrary('libfreetype.so')
-except OSError as e:
-    logger.warning(e)
-
-
-from ft2.types import *
-from ft2.image import *
-from ft2.api import *
+Short = ctypes.c_short
