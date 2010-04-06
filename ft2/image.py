@@ -18,11 +18,23 @@
 
 import ctypes
 
-__all__ = ['BBox', 'Pos']
+__all__ = ['Pos', 'BBox', 'Outline', 'Vector']
 
 
 # Typedefs
 Pos = ctypes.c_long
+
+
+# Outline Flags
+OUTLINE_NONE = 0
+OUTLINE_OWNER = 1
+OUTLINE_EVEN_ODD_FILL = 2
+OUTLINE_REVERSE_FILL = 4
+OUTLINE_IGNORE_DROPOUTS = 8
+OUTLINE_SMART_DROPOUTS = 16
+OUTLINE_INCLUDE_STUBS = 32
+OUTLINE_HIGH_PRECISION = 256
+OUTLINE_SINGLE_PASS = 512
 
 
 # Structures
@@ -37,4 +49,24 @@ class BBox(ctypes.Structure):
         ('yMin', Pos),
         ('xMax', Pos),
         ('yMax', Pos)
+    ]
+
+
+class Outline(ctypes.Structure):
+    """Describes an outline to the scan-line converter."""
+    _fields_ = [
+        ('n_contours', ctypes.c_short),
+        ('n_points', ctypes.c_short),
+        ('points', ctypes.POINTER(Vector)),
+        ('tags', ctypes.c_char_p),
+        ('contours', ctypes.POINTER(ctypes.c_short)),
+        ('flags', ctypes.c_int)
+    ]
+
+
+class Vector(ctypes.Structure):
+    """Stores a two-dimensional vector."""
+    _fields_ = [
+        ('x', Pos),
+        ('y', Pos)
     ]
