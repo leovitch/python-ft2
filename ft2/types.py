@@ -19,7 +19,7 @@
 import ctypes
 
 __all__ = ['Error', 'GenericFinalizer', 'Int', 'Long', 'Short', 'String',
-           'UShort', 'Generic']
+           'UShort', 'Generic', 'ListRec', 'ListNodeRec']
 
 
 # Typedefs
@@ -38,4 +38,24 @@ class Generic(ctypes.Structure):
     _fields_ = [
         ('data', ctypes.c_void_p),
         ('finalizer', GenericFinalizer)
+    ]
+
+
+class ListNodeRec(ctypes.Structure):
+    """Holds a single list element."""
+    pass
+
+
+ListNodeRec._fields_ = [
+    ('prev', ctypes.POINTER(ListNodeRec)),
+    ('next', ctypes.POINTER(ListNodeRec)),
+    ('data', ctypes.c_void_p)
+]
+
+
+class ListRec(ctypes.Structure):
+    """Holds a simple doubly-linked list used in FreeType."""
+    _fields_ = [
+        ('head', ctypes.POINTER(ListNodeRec)),
+        ('tail', ctypes.POINTER(ListNodeRec))
     ]
