@@ -19,7 +19,7 @@
 import ctypes
 
 __all__ = ['Error', 'Fixed', 'GenericFinalizer', 'Int', 'Long', 'Short',
-           'String', 'UShort', 'Generic', 'ListRec', 'ListNodeRec']
+           'String', 'UInt', 'UShort', 'Generic', 'ListRec', 'ListNodeRec']
 
 
 # Typedefs
@@ -30,6 +30,7 @@ Int = ctypes.c_int
 Long = ctypes.c_long
 Short = ctypes.c_short
 String = ctypes.c_char
+UInt = ctypes.c_uint
 UShort = ctypes.c_ushort
 
 
