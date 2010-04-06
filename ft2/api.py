@@ -193,6 +193,8 @@ class FaceRec(ctypes.Structure):
         ('family_name', ctypes.POINTER(types.String)),
         ('style_name', ctypes.POINTER(types.String)),
         ('num_fixed_sizes', types.Int),
+        ('available_sizes', ctypes.POINTER(BitmapSize)),
+        ('num_charmaps', types.Int),
         ('charmaps', ctypes.POINTER(ctypes.POINTER(CharMapRec))),
         ('generic', types.Generic),
         ('bbox', image.BBox),
