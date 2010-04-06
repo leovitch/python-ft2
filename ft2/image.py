@@ -18,7 +18,7 @@
 
 import ctypes
 
-__all__ = ['GlyphFormat', 'Pos', 'BBox', 'Outline', 'Vector']
+__all__ = ['GlyphFormat', 'Pos', 'BBox', 'Bitmap', 'Outline', 'Vector']
 
 
 # Enumerations
@@ -58,6 +58,20 @@ class BBox(ctypes.Structure):
         ('yMin', Pos),
         ('xMax', Pos),
         ('yMax', Pos)
+    ]
+
+
+class Bitmap(ctypes.Structure):
+    """Describes a bitmap or pixmap to the raster."""
+    _fields_ = [
+        ('rows', ctypes.c_int),
+        ('width', ctypes.c_int),
+        ('pitch', ctypes.c_int),
+        ('buffer', ctypes.c_char_p),
+        ('num_grays', ctypes.c_short),
+        ('pixel_mode', ctypes.c_char),
+        ('palette_mode', ctypes.c_char),
+        ('palette', ctypes.c_void_p)
     ]
 
 
