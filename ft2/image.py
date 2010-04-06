@@ -18,7 +18,16 @@
 
 import ctypes
 
-__all__ = ['Pos', 'BBox', 'Outline', 'Vector']
+__all__ = ['GlyphFormat', 'Pos', 'BBox', 'Outline', 'Vector']
+
+
+# Enumerations
+GLYPH_FORMAT_NONE = 0
+GLYPH_FORMAT_COMPOSITE = 1668246896
+GLYPH_FORMAT_BITMAP = 1651078259
+GLYPH_FORMAT_OUTLINE = 1869968492
+GLYPH_FORMAT_PLOTTER = 1886154612
+GlyphFormat = ctypes.c_ulong
 
 
 # Typedefs
@@ -52,6 +61,14 @@ class BBox(ctypes.Structure):
     ]
 
 
+class Vector(ctypes.Structure):
+    """Stores a two-dimensional vector."""
+    _fields_ = [
+        ('x', Pos),
+        ('y', Pos)
+    ]
+
+
 class Outline(ctypes.Structure):
     """Describes an outline to the scan-line converter."""
     _fields_ = [
@@ -61,12 +78,4 @@ class Outline(ctypes.Structure):
         ('tags', ctypes.c_char_p),
         ('contours', ctypes.POINTER(ctypes.c_short)),
         ('flags', ctypes.c_int)
-    ]
-
-
-class Vector(ctypes.Structure):
-    """Stores a two-dimensional vector."""
-    _fields_ = [
-        ('x', Pos),
-        ('y', Pos)
     ]
