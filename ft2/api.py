@@ -20,16 +20,18 @@ import ctypes
 
 from ft2 import image, libfreetype, system, types
 
-__all__ = ['LOAD_DEFAULT', 'LOAD_NO_SCALE', 'LOAD_NO_HINTING', 'LOAD_RENDER',
-           'LOAD_NO_BITMAP', 'LOAD_VERTICAL_LAYOUT', 'LOAD_FORCE_AUTOHINT',
-           'LOAD_CROP_BITMAP', 'LOAD_PEDANTIC',
+__all__ = ['RENDER_MODE_NORMAL', 'RENDER_MODE_LIGHT', 'RENDER_MODE_MONO',
+           'RENDER_MODE_LCD', 'RENDER_MODELCD_V', 'RENDER_MODE_MAX',
+           'RenderMode', 'LOAD_DEFAULT', 'LOAD_NO_SCALE', 'LOAD_NO_HINTING',
+           'LOAD_RENDER', 'LOAD_NO_BITMAP', 'LOAD_VERTICAL_LAYOUT',
+           'LOAD_FORCE_AUTOHINT', 'LOAD_CROP_BITMAP', 'LOAD_PEDANTIC',
            'LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH', 'LOAD_NO_RECURSE',
            'LOAD_IGNORE_TRANSFORM', 'LOAD_MONOCHROME', 'LOAD_LINEAR_DESIGN',
            'LOAD_NO_AUTOHINT', 'BitmapSize', 'GlyphMetrics', 'SizeMetrics',
            'CharMapRec', 'DriverRec', 'FaceRec', 'GlyphSlotRec', 'LibraryRec',
            'ModuleRec', 'SizeRec', 'Init_FreeType', 'Done_FreeType',
            'New_Face', 'Done_Face', 'Set_Char_Size', 'Load_Char', 'Load_Glyph',
-           'Get_Char_Index', 'Library_Version']
+           'Render_Glyph', 'Get_Char_Index', 'Library_Version']
 
 
 # Enumerations
@@ -53,6 +55,16 @@ ENCODING_ADOBE_LATIN_1 = 1818326065
 ENCODING_OLD_LATIN_2 = 1818326066
 ENCODING_APPLE_ROMAN = 1634889070
 Encoding = ctypes.c_uint32
+
+
+# Render Mode
+RENDER_MODE_NORMAL = 0
+RENDER_MODE_LIGHT = 1
+RENDER_MODE_MONO = 2
+RENDER_MODE_LCD = 3
+RENDER_MODELCD_V = 4
+RENDER_MODE_MAX = 5
+RenderMode = ctypes.c_int
 
 
 # Face Flags
@@ -294,6 +306,10 @@ Load_Char.argtypes = [ctypes.POINTER(FaceRec), types.ULong, types.Int32]
 Load_Glyph = libfreetype.FT_Load_Glyph
 Load_Glyph.restype = types.Error
 Load_Glyph.argtypes = [ctypes.POINTER(FaceRec), types.UInt, types.Int32]
+
+Render_Glyph = libfreetype.FT_Render_Glyph
+Render_Glyph.restype = types.Error
+Render_Glyph.argtypes = [ctypes.POINTER(GlyphSlotRec), RenderMode]
 
 Get_Char_Index = libfreetype.FT_Get_Char_Index
 Get_Char_Index.restype = types.UInt
