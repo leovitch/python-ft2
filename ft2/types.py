@@ -18,7 +18,8 @@
 
 import ctypes
 
-__all__ = ['Short']
+__all__ = ['Error', 'Short']
 
 
+Error = ctypes.c_int
 Short = ctypes.c_short

@@ -27,7 +27,7 @@ if len(logger.handlers) == 0:
 
 try:
     logger.info('Loading libfreetype...')
-    libGL = ctypes.cdll.LoadLibrary('libfreetype.so')
+    libfreetype = ctypes.cdll.LoadLibrary('libfreetype.so')
 except OSError as e:
     logger.warning(e)
 
