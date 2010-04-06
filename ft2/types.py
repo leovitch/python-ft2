@@ -18,12 +18,24 @@
 
 import ctypes
 
-__all__ = ['Error', 'Int', 'Long', 'Short', 'String', 'UShort']
+__all__ = ['Error', 'GenericFinalizer', 'Int', 'Long', 'Short', 'String',
+           'UShort', 'Generic']
 
 
+# Typedefs
 Error = ctypes.c_int
+GenericFinalizer = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
 Int = ctypes.c_int
 Long = ctypes.c_long
 Short = ctypes.c_short
 String = ctypes.c_char
 UShort = ctypes.c_ushort
+
+
+# Structures
+class Generic(ctypes.Structure):
+    """Associates client data to FreeType core objects."""
+    _fields_ = [
+        ('data', ctypes.c_void_p),
+        ('finalizer', GenericFinalizer)
+    ]
