@@ -45,7 +45,7 @@ ENCODING_ADOBE_CUSTOM = 1094992451
 ENCODING_ADOBE_LATIN_1 = 1818326065
 ENCODING_OLD_LATIN_2 = 1818326066
 ENCODING_APPLE_ROMAN = 1634889070
-Encoding = ctypes.c_int
+Encoding = ctypes.c_uint32
 
 
 # Face Flags
@@ -115,6 +115,11 @@ class CharMapRec(ctypes.Structure):
 
 class DriverRec(ctypes.Structure):
     """A special module capable of creating faces from font files."""
+    pass
+
+
+class LibraryRec(ctypes.Structure):
+    """Parent of all other objects in FreeType."""
     pass
 
 
@@ -195,17 +200,37 @@ CharMapRec._fields_ = [
 ]
 
 
+GlyphSlotRec._fields_ = [
+    ('library', ctypes.POINTER(LibraryRec)),
+    ('face', ctypes.POINTER(FaceRec)),
+    ('next', ctypes.POINTER(GlyphSlotRec)),
+    ('reserved', types.UInt),
+    ('generic', types.Generic),
+    ('metrics', GlyphMetrics),
+    ('linearHoriAdvance', types.Fixed),
+    ('linearVertAdvance', types.Fixed),
+    ('advance', image.Vector),
+    ('format', image.GlyphFormat),
+    ('bitmap', image.Bitmap),
+    ('bitmap_left', types.Int),
+    ('bitmap_top', types.Int),
+    ('outline', image.Outline),
+    ('num_subglyphs', types.UInt),
+    ('subglyphs', ctypes.POINTER(SubGlyphRec)),
+    ('control_data', ctypes.c_void_p),
+    ('control_len', ctypes.c_long),
+    ('lsb_delta', image.Pos),
+    ('rsb_delta', image.Pos),
+    ('internal', ctypes.POINTER(SlotInternalRec))
+]
+
+
 SizeRec._fields_ = [
     ('face', ctypes.POINTER(FaceRec)),
     ('generic', types.Generic),
     ('metrics', SizeMetrics),
     ('internal', ctypes.POINTER(SizeInternalRec))
 ]
-
-
-class LibraryRec(ctypes.Structure):
-    """Parent of all other objects in FreeType."""
-    pass
 
 
 class ModuleRec(ctypes.Structure):
