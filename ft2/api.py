@@ -29,7 +29,7 @@ __all__ = ['LOAD_DEFAULT', 'LOAD_NO_SCALE', 'LOAD_NO_HINTING', 'LOAD_RENDER',
            'CharMapRec', 'DriverRec', 'FaceRec', 'GlyphSlotRec', 'LibraryRec',
            'ModuleRec', 'SizeRec', 'Init_FreeType', 'Done_FreeType',
            'New_Face', 'Done_Face', 'Set_Char_Size', 'Load_Char', 'Load_Glyph',
-           'Get_Char_Index']
+           'Get_Char_Index', 'Library_Version']
 
 
 # Enumerations
@@ -296,3 +296,10 @@ Load_Glyph.argtypes = [ctypes.POINTER(FaceRec), types.UInt, types.Int32]
 Get_Char_Index = libfreetype.FT_Get_Char_Index
 Get_Char_Index.restype = types.UInt
 Get_Char_Index.argtypes = [ctypes.POINTER(FaceRec), types.ULong]
+
+Library_Version = libfreetype.FT_Library_Version
+Library_Version.restype = None
+Library_Version.argtypes = [ctypes.POINTER(LibraryRec),
+                            ctypes.POINTER(types.Int),
+                            ctypes.POINTER(types.Int),
+                            ctypes.POINTER(types.Int)]
