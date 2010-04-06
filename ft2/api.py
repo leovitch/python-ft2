@@ -20,10 +20,15 @@ import ctypes
 
 from ft2 import image, libfreetype, system, types
 
-__all__ = ['BitmapSize', 'GlyphMetrics', 'SizeMetrics', 'CharMapRec',
-           'DriverRec', 'FaceRec', 'GlyphSlotRec', 'LibraryRec', 'ModuleRec',
-           'SizeRec', 'Init_FreeType', 'Done_FreeType', 'New_Face',
-           'Done_Face', 'Set_Char_Size']
+__all__ = ['LOAD_DEFAULT', 'LOAD_NO_SCALE', 'LOAD_NO_HINTING', 'LOAD_RENDER',
+           'LOAD_NO_BITMAP', 'LOAD_VERTICAL_LAYOUT', 'LOAD_FORCE_AUTOHINT',
+           'LOAD_CROP_BITMAP', 'LOAD_PEDANTIC',
+           'LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH', 'LOAD_NO_RECURSE',
+           'LOAD_IGNORE_TRANSFORM', 'LOAD_MONOCHROME', 'LOAD_LINEAR_DESIGN',
+           'LOAD_NO_AUTOHINT', 'BitmapSize', 'GlyphMetrics', 'SizeMetrics',
+           'CharMapRec', 'DriverRec', 'FaceRec', 'GlyphSlotRec', 'LibraryRec',
+           'ModuleRec', 'SizeRec', 'Init_FreeType', 'Done_FreeType',
+           'New_Face', 'Done_Face', 'Set_Char_Size', 'Load_Char']
 
 
 # Enumerations
@@ -64,6 +69,24 @@ FACE_FLAG_EXTERNAL_STREAM = 1024
 FACE_FLAG_HINTER = 2048
 FACE_FLAG_CID_KEYED = 4096
 FACE_FLAG_TRICKY = 8192
+
+
+# Load Flags
+LOAD_DEFAULT = 0
+LOAD_NO_SCALE = 1
+LOAD_NO_HINTING = 2
+LOAD_RENDER = 4
+LOAD_NO_BITMAP = 8
+LOAD_VERTICAL_LAYOUT = 16
+LOAD_FORCE_AUTOHINT = 32
+LOAD_CROP_BITMAP = 64
+LOAD_PEDANTIC = 128
+LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH = 512
+LOAD_NO_RECURSE = 1024
+LOAD_IGNORE_TRANSFORM = 2048
+LOAD_MONOCHROME = 4096
+LOAD_LINEAR_DESIGN = 8192
+LOAD_NO_AUTOHINT = 32768
 
 
 class BitmapSize(ctypes.Structure):
@@ -260,3 +283,7 @@ Set_Char_Size = libfreetype.FT_Set_Char_Size
 Set_Char_Size.restype = types.Error
 Set_Char_Size.argtypes = [ctypes.POINTER(FaceRec), types.F26Dot6,
                           types.F26Dot6, types.UInt, types.UInt]
+
+Load_Char = libfreetype.FT_Load_Char
+Load_Char.restype = types.Error
+Load_Char.argtypes = [ctypes.POINTER(FaceRec), types.ULong, types.Int32]
