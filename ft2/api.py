@@ -24,6 +24,29 @@ __all__ = ['BitmapSize', 'GlyphMetrics', 'CharMapRec', 'DriverRec', 'FaceRec',
            'GlyphSlotRec', 'LibraryRec', 'ModuleRec', 'SizeRec']
 
 
+# Enumerations
+ENCODING_NONE = 0
+ENCODING_MS_SYMBOL = 1937337698
+ENCODING_UNICODE = 1970170211
+ENCODING_SJIS = 1936353651
+ENCODING_GB2312 = 1734484000
+ENCODING_BIG5 = 1651074869
+ENCODING_WANSUNG = 2002873971
+ENCODING_JOHAB = 1785686113
+ENCODING_MS_SJIS = ENCODING_SJIS
+ENCODING_MS_GB2312 = ENCODING_GB2312
+ENCODING_MS_BIG5 = ENCODING_BIG5
+ENCODING_MS_WANSUNG = ENCODING_WANSUNG
+ENCODING_MS_JOHAB = ENCODING_JOHAB
+ENCODING_ADOBE_STANDARD = 1094995778
+ENCODING_ADOBE_EXPERT = 1094992453
+ENCODING_ADOBE_CUSTOM = 1094992451
+ENCODING_ADOBE_LATIN_1 = 1818326065
+ENCODING_OLD_LATIN_2 = 1818326066
+ENCODING_APPLE_ROMAN = 1634889070
+Encoding = ctypes.c_int
+
+
 class BitmapSize(ctypes.Structure):
     """Models the metrics of a bitmap strike in a bitmap font."""
     _fields_ = [
@@ -48,6 +71,7 @@ class GlyphMetrics(ctypes.Structure):
         ('vertAdvance', image.Pos)
     ]
 
+
 class CharMapRec(ctypes.Structure):
     """
     Translates character codes in a given encoding into glyph indices for its
@@ -67,6 +91,12 @@ class FaceRec(ctypes.Structure):
     pass
 
 
+CharMapRec._fields_ = [
+    ('face', ctypes.POINTER(FaceRec)),
+    ('encoding', Encoding),
+    ('platform_id', types.UShort),
+    ('encoding_id', types.UShort)
+]
 
 
 class GlyphSlotRec(ctypes.Structure):
