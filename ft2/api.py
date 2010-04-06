@@ -18,7 +18,7 @@
 
 import ctypes
 
-from ft2 import image, libfreetype, types
+from ft2 import image, libfreetype, system, types
 
 __all__ = ['BitmapSize', 'GlyphMetrics', 'CharMapRec', 'DriverRec', 'FaceRec',
            'GlyphSlotRec', 'LibraryRec', 'ModuleRec', 'SizeRec']
@@ -86,9 +86,58 @@ class DriverRec(ctypes.Structure):
     pass
 
 
+class GlyphSlotRec(ctypes.Structure):
+    """
+    A container where glyph images are loaded independently of the glyph image
+    format.
+
+    """
+    pass
+
+
+class SizeRec(ctypes.Structure):
+    """Models a face scaled to a given character size."""
+    pass
+
+
+class FaceInternalRec(ctypes.Structure):
+    """Models private data of a given Face object."""
+    pass
+
+
 class FaceRec(ctypes.Structure):
     """Models a given typeface in a given style."""
-    pass
+    _fields_ = [
+        ('num_faces', types.Long),
+        ('face_index', types.Long),
+        ('face_flags', types.Long),
+        ('style_flags', types.Long),
+        ('num_glyphs', types.Long),
+        ('family_name', ctypes.POINTER(types.String)),
+        ('style_name', ctypes.POINTER(types.String)),
+        ('num_fixed_sizes', types.Int),
+        ('charmaps', ctypes.POINTER(ctypes.POINTER(CharMapRec))),
+        ('generic', types.Generic),
+        ('bbox', image.BBox),
+        ('units_per_EM', types.UShort),
+        ('ascender', types.Short),
+        ('descender', types.Short),
+        ('height', types.Short),
+        ('max_advance_width', types.Short),
+        ('max_advance_height', types.Short),
+        ('underline_position', types.Short),
+        ('underline_thickness', types.Short),
+        ('glyph', ctypes.POINTER(GlyphSlotRec)),
+        ('size', ctypes.POINTER(SizeRec)),
+        ('charmap', ctypes.POINTER(CharMapRec)),
+        ('driver', ctypes.POINTER(DriverRec)),
+        ('memory', ctypes.POINTER(system.MemoryRec)),
+        ('stream', ctypes.POINTER(system.StreamRec)),
+        ('sizes_list', ctypes.POINTER(types.ListRec)),
+        ('autohint', types.Generic),
+        ('extensions', ctypes.c_void_p),
+        ('internal', ctypes.POINTER(FaceInternalRec))
+    ]
 
 
 CharMapRec._fields_ = [
@@ -99,20 +148,6 @@ CharMapRec._fields_ = [
 ]
 
 
-class FaceInternalRec(ctypes.Structure):
-    """Models private data of a given Face object."""
-    pass
-
-
-class GlyphSlotRec(ctypes.Structure):
-    """
-    A container where glyph images are loaded independently of the glyph image
-    format.
-
-    """
-    pass
-
-
 class LibraryRec(ctypes.Structure):
     """Parent of all other objects in FreeType."""
     pass
@@ -120,11 +155,6 @@ class LibraryRec(ctypes.Structure):
 
 class ModuleRec(ctypes.Structure):
     """Provides services in FreeType."""
-    pass
-
-
-class SizeRec(ctypes.Structure):
-    """Models a face scaled to a given character size."""
     pass
 
 
