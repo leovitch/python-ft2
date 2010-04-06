@@ -99,6 +99,11 @@ CharMapRec._fields_ = [
 ]
 
 
+class FaceInternalRec(ctypes.Structure):
+    """Models private data of a given Face object."""
+    pass
+
+
 class GlyphSlotRec(ctypes.Structure):
     """
     A container where glyph images are loaded independently of the glyph image
