@@ -22,7 +22,8 @@ from ft2 import image, libfreetype, system, types
 
 __all__ = ['BitmapSize', 'GlyphMetrics', 'SizeMetrics', 'CharMapRec',
            'DriverRec', 'FaceRec', 'GlyphSlotRec', 'LibraryRec', 'ModuleRec',
-           'SizeRec', 'Init_FreeType', 'Done_FreeType', 'New_Face', 'Done_Face']
+           'SizeRec', 'Init_FreeType', 'Done_FreeType', 'New_Face',
+           'Done_Face', 'Set_Char_Size']
 
 
 # Enumerations
@@ -254,3 +255,8 @@ New_Face.argtypes = [ctypes.POINTER(LibraryRec), ctypes.c_char_p, types.Long,
 Done_Face = libfreetype.FT_Done_Face
 Done_Face.restype = types.Error
 Done_Face.argtypes = [ctypes.POINTER(FaceRec)]
+
+Set_Char_Size = libfreetype.FT_Set_Char_Size
+Set_Char_Size.restype = types.Error
+Set_Char_Size.argtypes = [ctypes.POINTER(FaceRec), types.F26Dot6,
+                          types.F26Dot6, types.UInt, types.UInt]
