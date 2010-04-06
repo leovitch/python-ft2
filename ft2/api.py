@@ -112,6 +112,11 @@ class GlyphSlotRec(ctypes.Structure):
     pass
 
 
+class SizeInternalRec(ctypes.Structure):
+    """Models private data of a given Size object."""
+    pass
+
+
 class SizeRec(ctypes.Structure):
     """Models a face scaled to a given character size."""
     pass
