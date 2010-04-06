@@ -18,12 +18,14 @@
 
 import ctypes
 
-__all__ = ['Error', 'Fixed', 'GenericFinalizer', 'Int', 'Long', 'Short',
-           'String', 'UInt', 'UShort', 'Generic', 'ListRec', 'ListNodeRec']
+__all__ = ['Error', 'F26Dot6', 'Fixed', 'GenericFinalizer', 'Int', 'Long',
+           'Short', 'String', 'UInt', 'UShort', 'Generic', 'ListRec',
+           'ListNodeRec']
 
 
 # Typedefs
 Error = ctypes.c_int
+F26Dot6 = ctypes.c_long
 Fixed = ctypes.c_long
 GenericFinalizer = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
 Int = ctypes.c_int
