@@ -18,10 +18,10 @@
 
 import ctypes
 
-from ft2 import image, types
+from ft2 import image, libfreetype, types
 
 __all__ = ['BitmapSize', 'CharMap', 'Driver', 'Face', 'GlyphMetrics',
-           'GlyphSlot', 'Library', 'Module', 'Size']
+           'GlyphSlot', 'LibraryRec', 'Module', 'Size']
 
 
 class BitmapSize(ctypes.Structure):
@@ -77,8 +77,7 @@ class GlyphSlot(ctypes.Structure):
     pass
 
 
-class Library(ctypes.Structure):
-    """Parent of all other objects in FreeType."""
+class LibraryRec(ctypes.Structure):
     pass
 
 
@@ -90,3 +89,12 @@ class Module(ctypes.Structure):
 class Size(ctypes.Structure):
     """Models a face scaled to a given character size."""
     pass
+
+
+Init_FreeType = libfreetype.FT_Init_FreeType
+Init_FreeType.restype = types.Error
+Init_FreeType.argtypes = [ctypes.POINTER(ctypes.POINTER(LibraryRec))]
+
+Done_FreeType = libfreetype.FT_Done_FreeType
+Done_FreeType.restype = types.Error
+Done_FreeType.argtypes = [ctypes.POINTER(LibraryRec)]
