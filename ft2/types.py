@@ -18,9 +18,9 @@
 
 import ctypes
 
-__all__ = ['Error', 'F26Dot6', 'Fixed', 'GenericFinalizer', 'Int', 'Long',
-           'Short', 'String', 'UInt', 'UInt32', 'UShort', 'Generic', 'ListRec',
-           'ListNodeRec']
+__all__ = ['Error', 'F26Dot6', 'Fixed', 'GenericFinalizer', 'Int', 'Int32',
+           'Long', 'Short', 'String', 'UInt', 'UInt32', 'ULong', 'UShort',
+           'Generic', 'ListRec', 'ListNodeRec']
 
 
 # Typedefs
@@ -29,11 +29,13 @@ F26Dot6 = ctypes.c_long
 Fixed = ctypes.c_long
 GenericFinalizer = ctypes.CFUNCTYPE(None, ctypes.c_void_p)
 Int = ctypes.c_int
+Int32 = ctypes.c_int32
 Long = ctypes.c_long
 Short = ctypes.c_short
 String = ctypes.c_char
 UInt = ctypes.c_uint
 UInt32 = ctypes.c_uint32
+ULong = ctypes.c_ulong
 UShort = ctypes.c_ushort
 
 
