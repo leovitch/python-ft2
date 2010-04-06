@@ -185,6 +185,14 @@ CharMapRec._fields_ = [
 ]
 
 
+SizeRec._fields_ = [
+    ('face', ctypes.POINTER(FaceRec)),
+    ('generic', types.Generic),
+    ('metrics', SizeMetrics),
+    ('internal', ctypes.POINTER(SizeInternalRec))
+]
+
+
 class LibraryRec(ctypes.Structure):
     """Parent of all other objects in FreeType."""
     pass
