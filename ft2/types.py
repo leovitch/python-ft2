@@ -18,9 +18,12 @@
 
 import ctypes
 
-__all__ = ['Error', 'Short', 'UShort']
+__all__ = ['Error', 'Int', 'Long', 'Short', 'String', 'UShort']
 
 
 Error = ctypes.c_int
+Int = ctypes.c_int
+Long = ctypes.c_long
 Short = ctypes.c_short
+String = ctypes.c_char
 UShort = ctypes.c_ushort
