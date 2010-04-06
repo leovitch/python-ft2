@@ -28,7 +28,7 @@ __all__ = ['LOAD_DEFAULT', 'LOAD_NO_SCALE', 'LOAD_NO_HINTING', 'LOAD_RENDER',
            'LOAD_NO_AUTOHINT', 'BitmapSize', 'GlyphMetrics', 'SizeMetrics',
            'CharMapRec', 'DriverRec', 'FaceRec', 'GlyphSlotRec', 'LibraryRec',
            'ModuleRec', 'SizeRec', 'Init_FreeType', 'Done_FreeType',
-           'New_Face', 'Done_Face', 'Set_Char_Size', 'Load_Char']
+           'New_Face', 'Done_Face', 'Set_Char_Size', 'Load_Char', 'Load_Glyph']
 
 
 # Enumerations
@@ -287,3 +287,7 @@ Set_Char_Size.argtypes = [ctypes.POINTER(FaceRec), types.F26Dot6,
 Load_Char = libfreetype.FT_Load_Char
 Load_Char.restype = types.Error
 Load_Char.argtypes = [ctypes.POINTER(FaceRec), types.ULong, types.Int32]
+
+Load_Glyph = libfreetype.FT_Load_Glyph
+Load_Glyph.restype = types.Error
+Load_Glyph.argtypes = [ctypes.POINTER(FaceRec), types.UInt, types.Int32]
