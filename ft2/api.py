@@ -20,8 +20,9 @@ import ctypes
 
 from ft2 import image, libfreetype, system, types
 
-__all__ = ['BitmapSize', 'GlyphMetrics', 'CharMapRec', 'DriverRec', 'FaceRec',
-           'GlyphSlotRec', 'LibraryRec', 'ModuleRec', 'SizeRec']
+__all__ = ['BitmapSize', 'GlyphMetrics', 'SizeMetrics', 'CharMapRec',
+           'DriverRec', 'FaceRec', 'GlyphSlotRec', 'LibraryRec', 'ModuleRec',
+           'SizeRec']
 
 
 # Enumerations
@@ -86,6 +87,20 @@ class GlyphMetrics(ctypes.Structure):
         ('vertBearingX', image.Pos),
         ('vertBearingY', image.Pos),
         ('vertAdvance', image.Pos)
+    ]
+
+
+class SizeMetrics(ctypes.Structure):
+    """Models the metrics of a Size object."""
+    _fields_ = [
+        ('x_ppem', types.UShort),
+        ('y_ppem', types.UShort),
+        ('x_scale', types.Fixed),
+        ('y_scale', types.Fixed),
+        ('ascender', image.Pos),
+        ('descender', image.Pos),
+        ('height', image.Pos),
+        ('max_advance', image.Pos)
     ]
 
 
