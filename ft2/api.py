@@ -20,8 +20,8 @@ import ctypes
 
 from ft2 import image, libfreetype, types
 
-__all__ = ['BitmapSize', 'CharMap', 'Driver', 'Face', 'GlyphMetrics',
-           'GlyphSlot', 'LibraryRec', 'Module', 'Size']
+__all__ = ['BitmapSize', 'GlyphMetrics', 'CharMapRec', 'DriverRec', 'FaceRec',
+           'GlyphSlotRec', 'LibraryRec', 'ModuleRec', 'SizeRec']
 
 
 class BitmapSize(ctypes.Structure):
@@ -33,25 +33,6 @@ class BitmapSize(ctypes.Structure):
         ('x_ppem', image.Pos),
         ('y_ppem', image.Pos)
     ]
-
-
-class CharMap(ctypes.Structure):
-    """
-    Translates character codes in a given encoding into glyph indices for its
-    parent's face.
-
-    """
-    pass
-
-
-class Driver(ctypes.Structure):
-    """A special module capable of creating faces from font files."""
-    pass
-
-
-class Face(ctypes.Structure):
-    """Models a given typeface in a given style."""
-    pass
 
 
 class GlyphMetrics(ctypes.Structure):
@@ -67,8 +48,28 @@ class GlyphMetrics(ctypes.Structure):
         ('vertAdvance', image.Pos)
     ]
 
+class CharMapRec(ctypes.Structure):
+    """
+    Translates character codes in a given encoding into glyph indices for its
+    parent's face.
 
-class GlyphSlot(ctypes.Structure):
+    """
+    pass
+
+
+class DriverRec(ctypes.Structure):
+    """A special module capable of creating faces from font files."""
+    pass
+
+
+class FaceRec(ctypes.Structure):
+    """Models a given typeface in a given style."""
+    pass
+
+
+
+
+class GlyphSlotRec(ctypes.Structure):
     """
     A container where glyph images are loaded independently of the glyph image
     format.
@@ -78,15 +79,16 @@ class GlyphSlot(ctypes.Structure):
 
 
 class LibraryRec(ctypes.Structure):
+    """Parent of all other objects in FreeType."""
     pass
 
 
-class Module(ctypes.Structure):
+class ModuleRec(ctypes.Structure):
     """Provides services in FreeType."""
     pass
 
 
-class Size(ctypes.Structure):
+class SizeRec(ctypes.Structure):
     """Models a face scaled to a given character size."""
     pass
 
