@@ -18,7 +18,23 @@
 
 import ctypes
 
-__all__ = ['Pos']
+__all__ = ['BBox', 'Pos']
 
 
+# Typedefs
 Pos = ctypes.c_long
+
+
+# Structures
+class BBox(ctypes.Structure):
+    """
+    Holds an outline's coordinates of its extrema in the horizontal and
+    vertical directions.
+
+    """
+    _fields_ = [
+        ('xMin', Pos),
+        ('yMin', Pos),
+        ('xMax', Pos),
+        ('yMax', Pos)
+    ]
