@@ -118,6 +118,16 @@ class DriverRec(ctypes.Structure):
     pass
 
 
+class SubGlyphRec(ctypes.Structure):
+    """Internal object used to describe subglyphs."""
+    pass
+
+
+class SlotInternalRec(ctypes.Structure):
+    """Models private data of a given GlyphSlot object."""
+    pass
+
+
 class GlyphSlotRec(ctypes.Structure):
     """
     A container where glyph images are loaded independently of the glyph image
