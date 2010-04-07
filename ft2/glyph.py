@@ -54,9 +54,11 @@ Get_Glyph.restype = types.Error
 Get_Glyph.argtypes = [ctypes.POINTER(api.GlyphSlotRec),
                       ctypes.POINTER(ctypes.POINTER(GlyphRec))]
 
+# XXX: 3rd argument is either a pointer to a Vector, or a 0.
 Glyph_To_Bitmap = libfreetype.FT_Glyph_To_Bitmap
 Glyph_To_Bitmap.restype = types.Error
-Glyph_To_Bitmap.argtypes = [ctypes.POINTER(ctypes.POINTER(GlyphRec)), api.RenderMode, ctypes.POINTER(image.Vector), types.Bool]
+Glyph_To_Bitmap.argtypes = [ctypes.POINTER(ctypes.POINTER(GlyphRec)),
+                            api.RenderMode, ctypes.c_void_p, types.Bool]
 
 Done_Glyph = libfreetype.FT_Done_Glyph
 Done_Glyph.restype = None

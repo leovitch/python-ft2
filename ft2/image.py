@@ -67,7 +67,7 @@ class Bitmap(ctypes.Structure):
         ('rows', ctypes.c_int),
         ('width', ctypes.c_int),
         ('pitch', ctypes.c_int),
-        ('buffer', ctypes.c_char_p),
+        ('buffer', ctypes.POINTER(ctypes.c_ubyte)),
         ('num_grays', ctypes.c_short),
         ('pixel_mode', ctypes.c_char),
         ('palette_mode', ctypes.c_char),
