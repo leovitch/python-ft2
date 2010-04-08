@@ -20,7 +20,7 @@ import ctypes
 
 __all__ = ['Bool', 'Error', 'F26Dot6', 'Fixed', 'GenericFinalizer', 'Int',
            'Int32', 'Long', 'Short', 'String', 'UInt', 'UInt32', 'ULong',
-           'UShort', 'Generic', 'ListRec', 'ListNodeRec']
+           'UShort', 'Matrix', 'Generic', 'ListRec', 'ListNodeRec']
 
 
 # Typedefs
@@ -41,6 +41,16 @@ UShort = ctypes.c_ushort
 
 
 # Structures
+class Matrix(ctypes.Structure):
+    """Stores a 2x2 matrix."""
+    _fields_ = [
+        ('xx', Fixed),
+        ('xy', Fixed),
+        ('yx', Fixed),
+        ('yy', Fixed)
+    ]
+
+
 class Generic(ctypes.Structure):
     """Associates client data to FreeType core objects."""
     _fields_ = [
