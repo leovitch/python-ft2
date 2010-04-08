@@ -20,8 +20,20 @@ import ctypes
 
 from ft2 import api, image, libfreetype, types
 
-__all__ = ['GlyphClass', 'GlyphRec', 'BitmapGlyphRec', 'Get_Glyph',
-           'Glyph_To_Bitmap', 'Done_Glyph']
+__all__ = ['GLYPH_BBOX_UNSCALED', 'GLYPH_BBOX_SUBPIXELS', 'GLYPH_BBOX_GRIDFIT',
+           'GLYPH_BBOX_TRUNCATE', 'GLYPH_BBOX_PIXELS', 'Glyph_BBox_Mode',
+           'GlyphClass', 'GlyphRec', 'BitmapGlyphRec', 'OutlineGlyphRec',
+           'Get_Glyph', 'Glyph_Copy', 'Glyph_Transform', 'Glyph_Get_CBox',
+           'Glyph_To_Bitmap', 'Done_Glyph', 'Matrix_Multiply', 'Matrix_Invert']
+
+
+# Enumerations
+GLYPH_BBOX_UNSCALED = 0
+GLYPH_BBOX_SUBPIXELS = 0
+GLYPH_BBOX_GRIDFIT = 1
+GLYPH_BBOX_TRUNCATE = 2
+GLYPH_BBOX_PIXELS = 3
+Glyph_BBox_Mode = ctypes.c_int
 
 
 class GlyphClass(ctypes.Structure):
@@ -40,7 +52,7 @@ class GlyphRec(ctypes.Structure):
 
 
 class BitmapGlyphRec(ctypes.Structure):
-    """Contains bitmap glyph images."""
+    """Used to model a bitmap glyph image."""
     _fields_ = [
         ('root', ctypes.POINTER(GlyphRec)),
         ('left', types.Int),
@@ -49,10 +61,34 @@ class BitmapGlyphRec(ctypes.Structure):
     ]
 
 
+class OutlineGlyphRec(ctypes.Structure):
+    """Used for outline (vectorial) glyph images."""
+    _fields_ = [
+        ('root', ctypes.POINTER(GlyphRec)),
+        ('outline', image.Outline)
+    ]
+
+
 Get_Glyph = libfreetype.FT_Get_Glyph
 Get_Glyph.restype = types.Error
 Get_Glyph.argtypes = [ctypes.POINTER(api.GlyphSlotRec),
                       ctypes.POINTER(ctypes.POINTER(GlyphRec))]
+
+Glyph_Copy = libfreetype.FT_Glyph_Copy
+Glyph_Copy.restype = types.Error
+Glyph_Copy.argtypes = [ctypes.POINTER(GlyphRec),
+                       ctypes.POINTER(ctypes.POINTER(GlyphRec))]
+
+Glyph_Transform = libfreetype.FT_Glyph_Transform
+Glyph_Transform.restype = types.Error
+Glyph_Transform.argtypes = [ctypes.POINTER(GlyphRec),
+                            ctypes.POINTER(types.Matrix),
+                            ctypes.POINTER(image.Vector)]
+
+Glyph_Get_CBox = libfreetype.FT_Glyph_Get_CBox
+Glyph_Get_CBox.restype = None
+Glyph_Get_CBox.argtypes = [ctypes.POINTER(GlyphRec), types.UInt,
+                           ctypes.POINTER(image.BBox)]
 
 # XXX: 3rd argument is either a pointer to a Vector, or a 0.
 Glyph_To_Bitmap = libfreetype.FT_Glyph_To_Bitmap
@@ -63,3 +99,12 @@ Glyph_To_Bitmap.argtypes = [ctypes.POINTER(ctypes.POINTER(GlyphRec)),
 Done_Glyph = libfreetype.FT_Done_Glyph
 Done_Glyph.restype = None
 Done_Glyph.argtypes = [ctypes.POINTER(GlyphRec)]
+
+Matrix_Multiply = libfreetype.FT_Matrix_Multiply
+Matrix_Multiply.restype = None
+Matrix_Multiply.argtypes = [ctypes.POINTER(types.Matrix),
+                            ctypes.POINTER(types.Matrix)]
+
+Matrix_Invert = libfreetype.FT_Matrix_Invert
+Matrix_Invert.restype = types.Error
+Matrix_Invert.argtypes = [ctypes.POINTER(types.Matrix)]
