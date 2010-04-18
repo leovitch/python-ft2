@@ -22,16 +22,23 @@ from ft2 import image, libfreetype, system, types
 
 __all__ = ['RENDER_MODE_NORMAL', 'RENDER_MODE_LIGHT', 'RENDER_MODE_MONO',
            'RENDER_MODE_LCD', 'RENDER_MODELCD_V', 'RENDER_MODE_MAX',
-           'RenderMode', 'LOAD_DEFAULT', 'LOAD_NO_SCALE', 'LOAD_NO_HINTING',
-           'LOAD_RENDER', 'LOAD_NO_BITMAP', 'LOAD_VERTICAL_LAYOUT',
-           'LOAD_FORCE_AUTOHINT', 'LOAD_CROP_BITMAP', 'LOAD_PEDANTIC',
+           'RenderMode', 'KERNING_DEFAULT', 'KERNING_UNFITTED',
+           'KERNING_UNSCALED', 'Kerning_Mode', 'FACE_FLAG_SCALABLE',
+           'FACE_FLAG_FIXED_SIZES', 'FACE_FLAG_FIXED_WIDTH', 'FACE_FLAG_SFNT',
+           'FACE_FLAG_HORIZONTAL', 'FACE_FLAG_VERTICAL', 'FACE_FLAG_KERNING',
+           'FACE_FLAG_FAST_GLYPHS', 'FACE_FLAG_MULTIPLE_MASTERS',
+           'FACE_FLAG_GLYPH_NAMES', 'FACE_FLAG_EXTERNAL_STREAM',
+           'FACE_FLAG_HINTER', 'FACE_FLAG_CID_KEYED', 'FACE_FLAG_TRICKY',
+           'LOAD_DEFAULT', 'LOAD_NO_SCALE', 'LOAD_NO_HINTING', 'LOAD_RENDER',
+           'LOAD_NO_BITMAP', 'LOAD_VERTICAL_LAYOUT', 'LOAD_FORCE_AUTOHINT',
+           'LOAD_CROP_BITMAP', 'LOAD_PEDANTIC',
            'LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH', 'LOAD_NO_RECURSE',
            'LOAD_IGNORE_TRANSFORM', 'LOAD_MONOCHROME', 'LOAD_LINEAR_DESIGN',
            'LOAD_NO_AUTOHINT', 'BitmapSize', 'GlyphMetrics', 'SizeMetrics',
            'CharMapRec', 'DriverRec', 'FaceRec', 'GlyphSlotRec', 'LibraryRec',
            'ModuleRec', 'SizeRec', 'Init_FreeType', 'Done_FreeType',
            'New_Face', 'Done_Face', 'Set_Char_Size', 'Load_Char', 'Load_Glyph',
-           'Render_Glyph', 'Get_Char_Index', 'Library_Version']
+           'Render_Glyph', 'Get_Char_Index', 'Get_Kerning', 'Library_Version']
 
 
 # Enumerations
@@ -64,7 +71,14 @@ RENDER_MODE_MONO = 2
 RENDER_MODE_LCD = 3
 RENDER_MODELCD_V = 4
 RENDER_MODE_MAX = 5
-RenderMode = ctypes.c_int
+RenderMode = ctypes.c_uint
+
+
+# Kerning Mode
+KERNING_DEFAULT = 0
+KERNING_UNFITTED = 1
+KERNING_UNSCALED = 2
+Kerning_Mode = ctypes.c_uint
 
 
 # Face Flags
@@ -314,6 +328,11 @@ Render_Glyph.argtypes = [ctypes.POINTER(GlyphSlotRec), RenderMode]
 Get_Char_Index = libfreetype.FT_Get_Char_Index
 Get_Char_Index.restype = types.UInt
 Get_Char_Index.argtypes = [ctypes.POINTER(FaceRec), types.ULong]
+
+Get_Kerning = libfreetype.FT_Get_Kerning
+Get_Kerning.restype = types.Error
+Get_Kerning.argtypes = [ctypes.POINTER(FaceRec), types.UInt, types.UInt,
+                        types.UInt, ctypes.POINTER(image.Vector)]
 
 Library_Version = libfreetype.FT_Library_Version
 Library_Version.restype = None
