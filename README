@@ -21,9 +21,13 @@ library interface.
 - All types must be instantiated in Python style by calling the class:
     bitm = FT.Bitmap()
 - This is ctypes-based, so pointers are dereferenced by accessing .contents, etc.
-  A genereal knowledge of ctypes is probably necessary to use this binding;
+  A general knowledge of ctypes is probably necessary to use this binding;
   you frequently need to construct pointers to structure objects, pass structures
   by reference, and so on to conform to the freetype API.
+- Note that C++ freetype itself has both basic types that are pointers (FT_Face)
+  and basic types that are structures (FT_Bitmap) in its interface.
+  This is reproduced in the Python interface but obviously the mechanics
+  of accessing them are different.
 - See the test suite for examples of Python code.
 
 Coverage
