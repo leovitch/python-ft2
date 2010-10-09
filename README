@@ -1,20 +1,30 @@
 Python-FT2
 ==========
-
 Python-FT2 is a ctypes binding for the FreeType2 project.
 
 
 Dependencies
 ------------
-
-Python 3.0+ - http://www.python.org/
-
+ctypes, included in Python 2.5 +
 
 Documentation
 -------------
-
-Extensive documentation and installation instructions can be found in the
-``docs`` directory of this source distribution.
+The freetype2 package is intended to be
+exactly parallel to the freetype library interface.
+A few systemic changes:
+- The python package name is freetype2, all libfreetype
+symbols are in that package but the leading FT_ has been
+removed.  To closely parallel freetype code, consider
+using this import statement:
+    import freetype2 as FT
+Now freetype library calls such as FT_Init_FreeType
+become FT.Init_FreeType.
+- All types must be instantiated in Python style 
+by calling the class:
+    bitm = FT.Bitmap()
+- This is ctypes-based, so pointers are dereferenced
+by accessing .contents, etc.
+- See the test suite for examples of Python code.
 
 
 Support
