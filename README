@@ -6,29 +6,34 @@ Python-FT2 is a ctypes binding for the FreeType2 project.
 Dependencies
 ------------
 ctypes, included in Python 2.5 +
+PIL, only if you want to run the test suite
 
 Documentation
 -------------
-The freetype2 package is intended to be
-exactly parallel to the freetype library interface.
-A few systemic changes:
-- The python package name is freetype2, all libfreetype
-symbols are in that package but the leading FT_ has been
-removed.  To closely parallel freetype code, consider
-using this import statement:
+The freetype2 package is intended to be exactly parallel to the freetype 
+library interface.
+
+- The python package name is freetype2, the libfreetype symbols are 
+  in that package but the leading FT_ has been removed.  
+  To closely parallel freetype code, consider using this import statement:
     import freetype2 as FT
-Now freetype library calls such as FT_Init_FreeType
-become FT.Init_FreeType.
-- All types must be instantiated in Python style 
-by calling the class:
+  Now freetype library calls such as FT_Init_FreeType become FT.Init_FreeType.
+- All types must be instantiated in Python style by calling the class:
     bitm = FT.Bitmap()
-- This is ctypes-based, so pointers are dereferenced
-by accessing .contents, etc.
+- This is ctypes-based, so pointers are dereferenced by accessing .contents, etc.
+  A genereal knowledge of ctypes is probably necessary to use this binding;
+  you frequently need to construct pointers to structure objects, pass structures
+  by reference, and so on to conform to the freetype API.
 - See the test suite for examples of Python code.
 
+Coverage
+--------
+I don't have an exact count of the coverage of freetype2.  The tutorials
+are all ported but there are more routines still to be done.
 
 Support
 -------
+Updater:  this project is hosted on github, please direct requests there.
 
-For any feature requests or issues regarding this project, please e-mail
-rcoyner@gmail.com.
+Original author's comment: for any feature requests or issues regarding 
+this project, please e-mail rcoyner@gmail.com.
