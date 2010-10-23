@@ -45,3 +45,4 @@ from ftimage import *
 from freetype import *
 from ftglyph import *
 from ftbitmap import *
+from ftadvance import *
