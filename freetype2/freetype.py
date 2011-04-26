@@ -406,9 +406,21 @@ Render_Glyph = libfreetype.FT_Render_Glyph
 Render_Glyph.restype = fttypes.Error
 Render_Glyph.argtypes = [GlyphSlot, RenderMode]
 
+Select_Charmap = libfreetype.FT_Select_Charmap
+Select_Charmap.restype = fttypes.Error
+Select_Charmap.argtypes = [Face, fttypes.ULong]
+
 Get_Char_Index = libfreetype.FT_Get_Char_Index
 Get_Char_Index.restype = fttypes.UInt
 Get_Char_Index.argtypes = [Face, fttypes.ULong]
+
+Get_First_Char = libfreetype.FT_Get_First_Char
+Get_First_Char.restype = fttypes.ULong
+Get_First_Char.argtypes = [Face, ctypes.POINTER(fttypes.UInt)]
+
+Get_Next_Char = libfreetype.FT_Get_Next_Char
+Get_Next_Char.restype = fttypes.Error
+Get_Next_Char.argtypes = [Face, fttypes.ULong, ctypes.POINTER(fttypes.UInt)]
 
 Get_Kerning = libfreetype.FT_Get_Kerning
 Get_Kerning.restype = fttypes.Error
